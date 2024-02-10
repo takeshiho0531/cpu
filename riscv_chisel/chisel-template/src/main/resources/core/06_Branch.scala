@@ -52,10 +52,10 @@ val csignals = ListLookup(inst,
         SLTIU -> List(ALU_SLTU, OP1_RS1, OP2_IMI, MEN_X, REN_S, WB_ALU),
         BEQ -> List(BR_BEQ, OP1_RS1, OP2_RS2, MEN_X, REN_X, WB_X),
         BNE -> List(BR_BNE, OP1_RS1, OP2_RS2, MEN_X, REN_X, WB_X),
-        BGE -> List(BR_BLT, OP1_RS1, OP2_RS2, MEN_X, REN_X, WB_X),
-        BGEU -> List(BR_BGE, OP1_RS1, OP2_RS2, MEN_X, REN_X, WB_X),
-        BLT -> List(BR_BLTU, OP1_RS1, OP2_RS2, MEN_X, REN_X, WB_X),
-        BLTU -> List(BR_BGEU, OP1_RS1, OP2_RS2, MEN_X, REN_X, WB_X)
+        BGE -> List(BR_BGE, OP1_RS1, OP2_RS2, MEN_X, REN_X, WB_X),
+        BGEU -> List(BR_BGEU, OP1_RS1, OP2_RS2, MEN_X, REN_X, WB_X),
+        BLT -> List(BR_BLT, OP1_RS1, OP2_RS2, MEN_X, REN_X, WB_X),
+        BLTU -> List(BR_BLTU, OP1_RS1, OP2_RS2, MEN_X, REN_X, WB_X)
     )
 )
 
