@@ -9,8 +9,8 @@ val io = IO(new Bundle {
 })
 
 io.dmem.rdata := Cat(
-    mem(io.data.addr + 3.U(WORD_LEN.W)),
-    mem(io.data.addr + 2.U(WORD_LEN.W)),
-    mem(io.data.addr + 1.U(WORD_LEN.W)),
-    mem(io.data.addr)
+    mem(io.dmem.addr + 3.U(WORD_LEN.W)),
+    mem(io.dmem.addr + 2.U(WORD_LEN.W)),
+    mem(io.dmem.addr + 1.U(WORD_LEN.W)),
+    mem(io.dmem.addr)
 )

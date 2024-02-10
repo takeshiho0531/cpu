@@ -12,7 +12,17 @@ val csignals = ListLookup(inst,
         XOR -> List(ALU_XOR, OP1_RS1, OP2_RS2, MEN_X, REN_S, WB_ALU),
         ANDI -> List(ALU_AND, OP1_RS1, OP2_IMI, MEN_X, REN_S, WB_ALU),
         ORI -> List(ALU_OR, OP1_RS1, OP2_IMI, MEN_X, REN_S, WB_ALU),
-        XORI -> List(XOR, OP1_RS1, OP2_IMI, MEN_X, REN_S, WB_ALU)
+        XORI -> List(XOR, OP1_RS1, OP2_IMI, MEN_X, REN_S, WB_ALU),
+        SLL -> List(ALU_SLL, OP1_RS1, OP2_RS2, MEN_X, REN_S, WB_ALU),
+        SRL -> List(ALU_SRL, OP1_RS1, OP2_RS2, MEN_X, REN_S, WB_ALU),
+        SRA -> List(ALU_SRA, OP1_RS1, OP2_RS2, MEN_X, REN_S, WB_ALU),
+        SLLI -> List(ALU_SLL, OP1_RS1, OP2_IMI, MEN_X, REN_S, WB_ALU),
+        SRLI -> List(ALU_SRL, OP1_RS1, OP2_IMI, MEN_X, REN_S, WB_ALU),
+        SRAI -> List(ALU_SRA, OP1_RS1, OP2_IMI, MEN_X, REN_S, WB_ALU),
+        SLT -> List(ALU_SLT, OP1_RS1, OP2_RS2, MEN_X, REN_S, WB_ALU),
+        SLTU -> List(ALU_SLTU, OP1_RS1, OP2_RS2, MEN_X, REN_S, WB_ALU),
+        SLTI -> List(ALU_SLT, OP1_RS1, OP2_IMI, MEN_X, REN_S, WB_ALU),
+        SLTIU -> List(ALU_SLTU, OP1_RS1, OP2_IMI, MEN_X, REN_S, WB_ALU)
     )
 )
 
@@ -33,7 +43,12 @@ val alu_out = MuxCase(0.U(WORD_LEN.W), Seq(
     (exe_fun === ALU_SUB) -> (op1_data - op2_data),
     (exe_fun === ALU_AND) -> (op1_data & op2_data),
     (exe_fun === ALU_OR) -> (op1_data | op2_data),
-    (exe_fun === ALU_XOR) -> (op1_data ^ op2_data)
+    (exe_fun === ALU_XOR) -> (op1_data ^ op2_data),
+    (exe_fun === ALU_SLL) -> (op1_data << op2_data(4,0))(31,0),
+    (exe_fun === ALU_SRL) -> (op1_data >> op2_data(4,0))(31,0),
+    (exe_fun === ALU_SRA) -> (op1_data.asSInt() >> op2_data(4,0)).asUInt(),
+    (exe_fun === ALU_SLT) -> (op1_data.asSInt() < op2_data.asSInt()).asUInt(),
+    (exe_fun === ALU_SLTU) -> (op1_data < op2_data).asUInt()
 ))
 
 io.dmem.wen := mem_wen
