@@ -72,3 +72,6 @@ object Instructions {
 
     // カスタム
     val PCNT = BitPat("b000000000000?????110?????0001011")
+}
+
+
